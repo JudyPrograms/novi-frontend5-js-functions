@@ -1,84 +1,107 @@
-// Je gaat functies schrijven die we kunnen hergebruiken om een lijst met eindcijfers van studenten te checken. Je zult over de cijfers heen moeten itereren (hoe pak je dat aan?),
-// maar ook een manier moeten vinden om hetgeen dat je verzamelt ergens te bundelen. Op deze manier zul je ontdekken hoe je omgaat met scope. Pak vooral het hoofdstuk op EdHub over for-loops er nog eens bij!
-// Tip: je mag hier geen ingebouwde object methoden gebruiken, dus daar hoef je niet naar te kijken.
-
-const grades = [9, 8, 5, 7, 7, 4, 9, 8, 8, 3, 6, 8, 5, 6];
-
-/* Opdracht  1: Cum Laude */
-
-/* 1a: Script schrijven  */
-// De administratie moet weten hoeveel studenten er dit blok cum laude zijn afgestudeerd (8 of hoger). Daar moeten namelijk speciale diploma's voor besteld worden.
-// Schrijf de stapjes om dit te kunnen checken eerst uit en vraag jezelf de volgende dingen af:
-// * Hoe kan ik iedere waarde van de array checken op deze conditie?
-// * Hoe zorg ik ervoor dat dit ook werkt wanneer de array 100 entries bevat?
-// * Hoe zorgt ik ervoor dat wanneer ik een cijfer tegenkom die aan de conditie voldoet, ik dit ergens kan bijhouden?
-// Log het antwoord in de terminal.
-
-// ---- Verwachte uitkomst: 6
+// Je gaat functies schrijven die we kunnen hergebruiken om sommige email-adressen te checken. Nu zul je gaan merken hoe
+// handig functies kunnen zijn!
+// Je zult hier methoden van het String Object voor nodig hebben, dus pak de paragraaf op EdHub over het String Object
+// er even bij.
 
 
-/*  1b: Omschrijven tot een herbruikbare functie   */
-// Schrijf een functie genaamd cumLaude, die een array van cijfers verwacht (zoals grades) en het aantal Cum laude studenten teruggeeft. Gebruik hiervoor jouw antwoord van 1a.
-// Zorg ervoor dat jouw functie ook werkt als we een andere array met eindcijfers willen checken, zoals bijvoorbeeld: [6, 4, 5] of [8, 9, 4, 6, 10].
-// Log het antwoord in de terminal.
-
+/* Opdracht  1 */
+// Schrijf een functie genaamd getEmailDomain, die een emailadres verwacht en de domeinnaam teruggeeft. Een domeinnaam
+// is hetgeen dat na het @ in het adres staat
 // ---- Verwachte uitkomsten:
-// cumLaude(grades) geeft 6
-// cumLaude([6, 4, 5]) geeft 0
-// cumLaude([8, 9, 4, 6, 10]) geeft 3
+// getEmailDomain("n.eeken@novi-education.nl") geeft novi-education.nl
+// getEmailDomain("t.mellink@novi.nl") geeft novi.nl
+// getEmailDomain("a.wiersma@outlook.com") geeft outlook.com
 
+// Creating variable with test address for executing all new functions
+const myMail = "hello@judyprograms.io"
 
+// Declaring function to create domain from email address
+function getEmailDomain(mail) {
+    return mail.split("@")[1]
+}
 
+// Calling function and checking result with test address
+console.log(getEmailDomain(myMail))
 
-/* Opdracht  2: Gemiddeld cijfer */
-
-/* 2a: Script schrijven  */
-// De studenten-administratie moet ieder blok opnieuw berekenen wat het gemiddelde eindcijfer is, maar we beginnen met de grades array van hierboven.
-// Schrijf de stapjes om dit te kunnen berekenen eerst uit en vraag jezelf de volgende dingen af:
-// * Hoe wordt een gemiddelde berekend?
-// * Wat moet ik verzamelen uit de array van cijfers om uiteindelijk een gemiddelde te kunnen berekenen?
-// * Hoe zorgt ik ervoor dat ik alle waardes uit de array kan langslopen, ook als de array wel 100 entries zou bevatten?
-// Log het antwoord in de terminal.
-
-// ---- Verwachte uitkomst: 6.642857142857143
-
-
-/* 2b: Omschrijven tot een herbruikbare functie */
-// Schrijf een functie genaamd averageGrade, die een array van cijfers verwacht (zoals grades) en het gemiddelde cijfer teruggeeft. Gebruik hiervoor jouw antwoord van 2a.
-// Zorg ervoor dat jouw functie ook werkt als we een andere array willen checken, zoals bijvoorbeeld: [6, 4, 5] of [8, 9, 4, 6, 10].
-// Log het antwoord in de terminal.
-
+/* Opdracht  2 */
+// Schrijf een functie genaamd typeOfEmail, die een emailadres verwacht. De functie checkt of het emailadres een novi
+// domein heeft (medewerker), een novi-education domein (student), of extern domein (zoals gmail of outlook)
 // ---- Verwachte uitkomsten:
-// averageGrade(grades) geeft 6.642857142857143
-// averageGrade([6, 4, 5]) geeft xxxx
-// averageGrade([8, 9, 4, 6, 10]) geeft xxxx
+// typeOfEmail("n.eeken@novi-education.nl") geeft "Student"
+// typeOfEmail("t.mellink@novi.nl") geeft geeft "Medewerker"
+// typeOfEmail("novi.nlaapjesk@outlook.com") geeft geeft "Extern" <-- deze moet het ook doen!
+// typeOfEmail("a.wiersma@outlook.com") geeft "Extern"
 
+// Declaring function to check the type of email address
+function typeOfEmail (mail) {
+    // First split address at @, then check content after @
+    if (mail.split("@")[1] === "novi-education.nl") {
+        return "Student"
+    }
+    else if (mail.split("@")[1] === "novi.nl") {
+        return "Medewerker"
+    }
+    else {
+        return "Extern"
+    }
+}
 
-/* 2c: Afronden op twee decimalen */
-// Zorg ervoor dat het gemiddelde cijfer dat wordt teruggegeven uit de functie netjes wordt afgerond op twee decimalen.
-// Tip: Google is your best friend!
+// Calling function and test if it works for different addresses
+console.log(typeOfEmail(myMail))
+console.log(typeOfEmail("n.eeken@novi-education.nl"))
+console.log(typeOfEmail("t.mellink@novi.nl"))
+console.log(typeOfEmail("a.wiersma@outlook.com"))
 
-
-
-
-/* Bonusopdracht: hoogste cijfer */
-
-/* 3a: Script schrijven  */
-// Schrijf een script die op basis van de grades array (hierboven) checkt wat het hoogst behaalde cijfer is. Je mag hier geen bestaande methoden voor gebruiken. Schrijf de stapjes eerst uit en vraag jezelf de volgende dingen af:
-// * Hoe kan ik iedere waarde van de array langsgaan?
-// * Op welke conditie moet ik checken?
-// * Hoe zorgt ik ervoor dat wanneer ik een cijfer tegenkom die aan de conditie voldoet, ik dit ergens kan opslaan?
-// Log het antwoord in de terminal.
-
-// ---- Verwachte uitkomst: 9
-
-
-/* 3b: Omschrijven tot een herbruikbare functie */
-// Schrijf een functie genaamd highestGrade, die een array van cijfers verwacht (zoals grades) en het hoogste cijfer teruggeeft. Gebruik hiervoor jouw antwoord van 3a.
-// Zorg ervoor dat jouw functie ook werkt als we een andere array willen checken, zoals bijvoorbeeld: [6, 4, 5] of [8, 9, 4, 6, 10].
-// Log het antwoord in de terminal.
-
+/* Opdracht  3 */
+// Schrijf een functie genaamd checkEmailValidity, die een emailadres verwacht en checkt of het emailadres valide is. De functie returned true of false, afhankelijk van de uitkomst.
+// Een emailadres is valide wanneer:
+// * Er een @ in voorkomt
+// * Er géén , in voorkomt
+// * Er géén . in voorkomt als allerlaatste karakter (dus hotmail.com is valide, net als outlook.nl, maar outlooknl. niet)
 // ---- Verwachte uitkomsten:
-// highestGrade(grades) geeft 9
-// highestGrade([6, 4, 5]) geeft 6
-// highestGrade([8, 9, 4, 6, 10]) geeft 10
+// checkEmailValidity("n.eeken@novi.nl") geeft true - want @ en punt op de juiste plek
+// checkEmailValidity("tessmellink@novi.nl") geeft true - want @ en punt op de juiste plek
+// checkEmailValidity("n.eekenanovi.nl") geeft false - want geen @
+// checkEmailValidity("n.eeken@novinl.") geeft false - want de punt mag niet als laatst
+// checkEmailValidity("tessmellink@novi,nl") geeft false - want er staat een komma in
+
+// Declaring function to check if email address has a valid format
+function checkEmailValidity(mail) {
+    let isValid = true;
+    if ((mail.indexOf("@") === -1) ||
+        mail.includes(",") ||
+        (mail.lastIndexOf(".") === (mail.length-1))) {
+        isValid = false
+    }
+    return isValid;
+}
+
+// Calling function to test if it works with test address
+console.log(checkEmailValidity(myMail) + `: ${myMail} is a valid email address`)
+
+// I challenged myself to do some more:
+// Setting up test that checks expected results of function for a set of given email addresses
+const testList = ["n.eeken@novi.nl", "tessmellink@novi.nl", "n.eekenanovi.nl", "n.eeken@novinl.", "tessmellink@novi,nl"]
+const expectedResults = [true, true, false, false, false]
+const testResults = []
+for (const mail of testList) {
+    const result = checkEmailValidity(mail)
+    testResults.push(result)
+}
+
+// Loop through results of executed function and compare with expected results
+let asExpected = true
+for (let i = 0; i < testResults.length; i++) {
+    if (testResults[i] !== expectedResults[i]) {
+        asExpected = false
+        break
+    }
+}
+
+// Log if results equal expected results
+if (asExpected) {
+    console.log("checkEmailValidity function has expected results")
+} else {
+    console.log("checkEmailValidity function has unexpected results")
+}
+
